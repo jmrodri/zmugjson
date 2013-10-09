@@ -1,0 +1,10 @@
+*.patch
+*.py?
+*.sw?
+*.coverage
+*.cov2emacs.log
+cover/
+#*.ropemacs
+*.ropeproject
+.\#*
+*.eml
