@@ -1,13 +1,12 @@
 %{!?python_sitelib: %define python_sitelib %(%{__python} -c "from distutils.sysconfig import get_python_lib; print get_python_lib()")}
 
 Name:           zmugjson
-Source1: version
-Version: %(echo `awk '{ print $1 }' %{SOURCE1}`)
-Release: %(echo `awk '{ print $2 }' %{SOURCE1}`)%{?dist}
+Version:        0.1
+Release:        1
 Summary:        FUSE-based filesystem Smugmug client
 Group:          Applications/Multimedia
 License:        GPL
-URL:            http://zmugtools.sourceforge.net/
+URL:            https://github.com/jmrodri/zmugjson
 Source0:        %{name}-%{version}.tar.gz
 BuildRoot:      %{_tmppath}/%{name}-root-%(%{__id_u} -n)
 BuildArch:      noarch
