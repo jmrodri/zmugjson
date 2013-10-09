@@ -3,7 +3,7 @@
 Name:           zmugjson
 Version:        0.1.2
 Release:        1
-Summary:        FUSE-based filesystem Smugmug client
+Summary:        zmugjson a smugmug.com JSON api
 Group:          Applications/Multimedia
 License:        GPL
 URL:            https://github.com/jmrodri/zmugjson
@@ -16,36 +16,30 @@ Requires:       python >= 2.3
 Requires:       python-simplejson
 
 %description
-FUSE-based filesystem to access Smugmug
+A JSON-based api wrapper used to connect to smugmug.com
 
 %prep
 %setup -q
 
-%build
-%{__python} setup.py build
-
 %install
 rm -rf %{buildroot}
-%{__python} setup.py install --root=%{buildroot}
-#install -d -m 755 %{buildroot}%{_usr}/share/%{name}/
-#install -d -m 755 %{buildroot}%{_usr}/share/doc/%{name}-%{version}/
-#install -d -m 755 %{buildroot}%{_usr}/bin/
-#install -d -m 755 %{buildroot}%{_sysconfdir}/%{name}/
+install -d -m 755 %{buildroot}%{_usr}/share/%{name}/
+install -d -m 755 %{buildroot}%{_usr}/share/doc/%{name}-%{version}/
+install -d -m 755 %{buildroot}%{_usr}/bin/
+install -d -m 755 %{buildroot}%{_sysconfdir}/%{name}/
+install -d -m 755 %{buildroot}%{python_sitelib}/%{name}/
 install -m 644 LICENSE.TXT %{buildroot}%{_usr}/share/doc/%{name}-%{version}/
-#install -m 644 smugmugrc %{buildroot}%{_usr}/share/doc/%{name}-%{version}/
-#install -m 755 sm-photo-tool.py %{buildroot}%{_usr}/bin/%{name}
+install -m 644 zmugjson.py %{buildroot}%{python_sitelib}/%{name}/
+install -m 644 config.py %{buildroot}%{python_sitelib}/%{name}/
 
 %clean
 rm -rf %{buildroot}
 
 %files
 %defattr(-,root,root)
-%{python_sitelib}/zmugjson.*py*
-%{python_sitelib}/config.*py*
-%attr(644, root, root) /etc/%{name}/logger.conf
-#%attr(755, root, root) %{_usr}/bin/%{name}
+%{python_sitelib}/%{name}/zmugjson.py*
+%{python_sitelib}/%{name}/config.py*
 %{_usr}/share/doc/%{name}-%{version}/LICENSE.TXT
-#%{_usr}/share/doc/%{name}-%{version}/smugmugrc
 
 %changelog
 * Tue Oct 08 2013 jesus m. rodriguez <jmrodri@gmail.com> 0.1.2-1
