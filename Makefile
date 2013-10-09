@@ -9,13 +9,8 @@ INITDIR	=
 PYCHECKER       = /usr/bin/pychecker
 PYFLAKES    = /usr/bin/pyflakes
 
-all: rpms
-
-bumprelease:	
-	-echo "$(VERSION) $(NEWRELEASE)" > version
-
-setversion: 
-	-echo "$(VERSION) $(RELEASE)" > version
+%.pyc: %.py
+	python -c "import py_compile; py_compile.compile('$<')"
 
 build: clean
 	python setup.py build -f
@@ -51,11 +46,6 @@ recombuild: install_harder restart
 clean_rpms:
 	-rpm -e zmugfs
 
-sdist:
-	python setup.py sdist
-
-new-rpms: bumprelease rpms
-
 pychecker:
 	@$(PYCHECKER) $(PYFILES) || exit 0
 
@@ -64,16 +54,3 @@ pyflakes:
 
 money: clean
 	-sloccount --addlang "makefile" $(TOPDIR) $(PYDIRS) $(EXAMPLEDIR) $(INITDIR)
- 
-rpms: build sdist
-	mkdir -p rpm-build
-	cp dist/*.gz rpm-build/
-	cp version rpm-build/
-	rpmbuild --define "_topdir %(pwd)/rpm-build" \
-	--define "_builddir %{_topdir}" \
-	--define "_rpmdir %{_topdir}" \
-	--define "_srcrpmdir %{_topdir}" \
-	--define '_rpmfilename %%{NAME}-%%{VERSION}-%%{RELEASE}.%%{ARCH}.rpm' \
-	--define "_specdir %{_topdir}" \
-	--define "_sourcedir  %{_topdir}" \
-	-ba zmugjson.spec
