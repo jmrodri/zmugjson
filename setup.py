@@ -5,7 +5,7 @@ from distutils.core import setup
 VERSION = open("version", "r+").read().split()[0]
 
 setup(name="zmugjson",
-      version="0.2",
+      version="0.1.2",
       description="zmugjson a smugmug.com JSON api",
       long_description="A JSON-based api wrapper used to connect to smugmug.com",
       author="Jesus M. Rodriguez",
