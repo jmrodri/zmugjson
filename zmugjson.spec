@@ -1,7 +1,7 @@
 %{!?python_sitelib: %define python_sitelib %(%{__python} -c "from distutils.sysconfig import get_python_lib; print get_python_lib()")}
 
 Name:           zmugjson
-Version:        0.1
+Version:        0.2
 Release:        1
 Summary:        FUSE-based filesystem Smugmug client
 Group:          Applications/Multimedia
@@ -48,5 +48,8 @@ rm -rf %{buildroot}
 #%{_usr}/share/doc/%{name}-%{version}/smugmugrc
 
 %changelog
+* Tue Oct 08 2013 jesus m. rodriguez <jmrodri@gmail.com> 0.2-1
+- new package built with tito
+
 * Tue Oct 30 2007 Jesus Rodriguez <jmrodri at gmail dot com> 0.1-1
 - initial rpm release
