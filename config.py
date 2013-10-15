@@ -1,7 +1,4 @@
 import os
-import stat
-import errno
-import time
 
 
 class Config:

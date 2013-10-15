@@ -1,6 +1,5 @@
 import unittest
 import zmugjson
-import sys
 from config import Config
 
 
@@ -29,13 +28,13 @@ class TestCategory(unittest.TestCase):
 class TestSmugmug(unittest.TestCase):
 
     def setUp(self):
-        self.sm = zmugjson.Smugmug()
+        self.sm = zmugjson.Smugmug("")
         self.config = Config('/etc/zmugjson/zmugjson.conf', '.zmugjsonrc')
 
     def testLoginWithPasswordInvalid(self):
         try:
             self.sm.loginWithPassword("foo", "baz")
-        except zmugjson.Exception, e:
+        except zmugjson.FaultException, e:
             self.assertEquals(1, e.code)
             self.assertEquals("invalid login", e.message)
 
@@ -55,7 +54,7 @@ class TestSmugmug(unittest.TestCase):
         # invalid session
         try:
             self.sm.logout("fefifofum")
-        except zmugjson.Exception, e:
+        except zmugjson.FaultException, e:
             self.assertEquals(18, e.code)
             self.assertEquals("invalid API key", e.message)
 

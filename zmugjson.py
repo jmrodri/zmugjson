@@ -153,7 +153,7 @@ class ZmugJSON:
         return rsp
 
 
-class Exception:
+class FaultException:
     def __init__(self, code, msg):
         self.code = code
         self.message = msg
@@ -183,7 +183,7 @@ class Smugmug:
         if session['stat'] == "ok":
             return session['Login']['Session']['id']
         else:
-            raise Exception(session['code'], session['message'])
+            raise FaultException(session['code'], session['message'])
 
     def loginAnonymously(self):
         rsp = self.sm.smugmug.login.anonymously(APIKey=self.key)
@@ -191,14 +191,14 @@ class Smugmug:
         if session['stat'] == "ok":
             return session['Login']['Session']['id']
         else:
-            raise Exception(session['code'], session['message'])
+            raise FaultException(session['code'], session['message'])
 
     def logout(self, sessionid):
         rsp = self.sm.smugmug.logout(SessionID=sessionid)
         rsp = simplejson.loads(rsp)
 
         if rsp['stat'] == "fail":
-            raise Exception(rsp['code'], rsp['message'])
+            raise FaultException(rsp['code'], rsp['message'])
 
         # TODO: handle error cases
         #    * 3 - "invalid session"
@@ -222,7 +222,6 @@ class Smugmug:
         """
         returns list of imageids for the given albumId
         """
-        imageids = []
         rsp = self.sm.smugmug.images.get(SessionID=sessionid, AlbumID=albumId, Heavy=heavy)
         rsp = simplejson.loads(rsp)
         # TODO: handle error cases
@@ -242,7 +241,6 @@ class Smugmug:
         """
         returns list of imageids for the given albumId
         """
-        imageids = []
         rsp = self.sm.smugmug.images.get(SessionID=sessionid, AlbumID=albumId)
         rsp = simplejson.loads(rsp)
         # TODO: handle error cases
