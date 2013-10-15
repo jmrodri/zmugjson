@@ -28,7 +28,7 @@ A JSON-based api wrapper used to connect to smugmug.com
 %install
 rm -rf %{buildroot}
 #install -d -m 755 %{buildroot}
-%{__python} setup.py install --skip-build --root %{buildroot}
+%{__python} setup.py install -O1 --skip-build --root %{buildroot}
 
 #install -d -m 755 %{buildroot}%{_usr}/share/%{name}/
 #install -d -m 755 %{buildroot}%{_usr}/bin/
@@ -44,8 +44,9 @@ rm -rf %{buildroot}
 
 %files
 %defattr(-,root,root)
-%{python_sitelib}/zmugjson.py*
-%{python_sitelib}/config.py*
+%{python_sitelib}/%{name}/zmugjson.py*
+%{python_sitelib}/%{name}/__init__.py*
+%{python_sitelib}/%{name}/config.py*
 %{python_sitelib}/zmugjson-*.egg-info
 %{_usr}/share/doc/%{name}-%{version}/LICENSE.TXT
 

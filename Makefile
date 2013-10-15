@@ -21,9 +21,10 @@ clean:
 	-rm -rf *~
 	-rm -rf rpm-build/
 	-rm -rf docs/*.gz
+	-rm -rf *.pyc
 
 clean_hard:
-	-rm -rf $(shell python -c "from distutils.sysconfig import get_python_lib; print get_python_lib()")/zmugfs
+	-rm -rf $(shell python -c "from distutils.sysconfig import get_python_lib; print get_python_lib()")/zmugjson
 
 clean_hardest: clean_rpms
 

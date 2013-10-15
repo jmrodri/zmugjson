@@ -1,6 +1,6 @@
 #!/usr/bin/python
 
-from setuptools import setup, find_packages, Extension
+from setuptools import setup, find_packages
 
 setup(
     name="zmugjson",
@@ -10,9 +10,12 @@ setup(
     author="Jesus M. Rodriguez",
     author_email="jmrodri@gmail.com",
     url="https://github.com/jmrodri/zmugjson",
-    package_dir={
-        'zmugjson': '.',
-    },
-    py_modules=["zmugjson", "config"],
     license="GPLv2",
+
+    package_dir={
+        'zmugjson': 'src/zmugjson',
+    },
+    packages = find_packages('src'),
+    include_package_data = True,
+    py_modules=["zmugjson", "config"],
 )
