@@ -31,7 +31,9 @@ rm -rf %{buildroot}
 %{__python} setup.py install -O1 --skip-build --root %{buildroot}
 
 install -d -m 755 %{buildroot}%{_usr}/share/doc/%{name}-%{version}/
+install -d -m 755 %{buildroot}%{_sysconfdir}/%{name}/
 install -m 644 LICENSE.TXT %{buildroot}%{_usr}/share/doc/%{name}-%{version}/
+install -m 644 logger.conf %{buildroot}%{_sysconfdir}/%{name}/
 
 %clean
 rm -rf %{buildroot}
@@ -43,6 +45,7 @@ rm -rf %{buildroot}
 %{python_sitelib}/%{name}/config.py*
 %{python_sitelib}/zmugjson-*.egg-info
 %{_usr}/share/doc/%{name}-%{version}/LICENSE.TXT
+%config %{_sysconfdir}/%{name}/logger.conf
 
 %changelog
 * Tue Oct 08 2013 jesus m. rodriguez <jmrodri@gmail.com> 0.1.2-1
