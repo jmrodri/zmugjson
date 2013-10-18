@@ -30,14 +30,8 @@ rm -rf %{buildroot}
 #install -d -m 755 %{buildroot}
 %{__python} setup.py install -O1 --skip-build --root %{buildroot}
 
-#install -d -m 755 %{buildroot}%{_usr}/share/%{name}/
-#install -d -m 755 %{buildroot}%{_usr}/bin/
-#install -d -m 755 %{buildroot}%{_sysconfdir}/%{name}/
-#install -d -m 755 %{buildroot}%{python_sitelib}/%{name}/
 install -d -m 755 %{buildroot}%{_usr}/share/doc/%{name}-%{version}/
 install -m 644 LICENSE.TXT %{buildroot}%{_usr}/share/doc/%{name}-%{version}/
-#install -m 644 zmugjson.py %{buildroot}%{python_sitelib}/%{name}/
-#install -m 644 config.py %{buildroot}%{python_sitelib}/%{name}/
 
 %clean
 rm -rf %{buildroot}
